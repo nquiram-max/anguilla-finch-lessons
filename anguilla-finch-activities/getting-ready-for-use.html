@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Ready for Using Finches</title>
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --card: #ffffff;
+      --text: #1f2a37;
+      --muted: #5b6573;
+      --brand: #4f7cff;
+      --brand-dark: #365fd8;
+      --accent: #fff8df;
+      --accent-border: #ead58a;
+      --border: #d9e2f2;
+      --shadow: 0 8px 24px rgba(31, 42, 55, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 18%, var(--bg) 100%); line-height: 1.55; }
+    .page { max-width: 900px; margin: 0 auto; padding: 28px 18px 56px; }
+    .hero { padding: 28px; color: white; background: linear-gradient(135deg, var(--brand) 0%, #6a8cff 100%); border-radius: 28px; box-shadow: var(--shadow); }
+    .back-link { display: inline-block; margin-bottom: 22px; color: white; font-weight: 700; text-decoration: none; }
+    .back-link:hover, .back-link:focus-visible { text-decoration: underline; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; }
+    .subtitle { max-width: 680px; margin: 14px 0 0; font-size: 1.05rem; opacity: 0.96; }
+    .card { margin-top: 18px; padding: 22px; background: var(--card); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); }
+    h2 { margin: 0 0 12px; font-size: 1.35rem; }
+    p { margin: 0; }
+    .steps { display: grid; gap: 12px; margin-top: 16px; padding-left: 22px; }
+    .steps li + li { margin-top: 8px; }
+    .download { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 20px; background: var(--accent); border: 1px solid var(--accent-border); border-radius: 16px; }
+    .download strong { display: block; }
+    .download span { color: var(--muted); }
+    .download a { flex: 0 0 auto; padding: 11px 14px; color: white; font-weight: 700; text-decoration: none; background: var(--brand-dark); border-radius: 10px; }
+    .download a:hover, .download a:focus-visible { background: #2849ad; outline: 3px solid rgba(54, 95, 216, 0.25); outline-offset: 2px; }
+    .upload-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 16px; }
+    .upload-card { padding: 16px; border: 1px solid var(--border); border-radius: 16px; background: #f9fbff; }
+    .upload-card h3 { margin: 0 0 6px; font-size: 1rem; }
+    .upload-card p { min-height: 48px; color: var(--muted); font-size: 0.92rem; }
+    .upload-preview { display: grid; min-height: 150px; margin: 12px 0; place-items: center; overflow: hidden; border: 2px dashed #bfd0f5; border-radius: 12px; background: white; color: var(--muted); text-align: center; }
+    .upload-preview img { display: block; max-width: 100%; max-height: 180px; object-fit: contain; }
+    .upload-card input[type="file"] { width: 100%; color: var(--muted); font: inherit; font-size: 0.85rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 18px; }
+    .footer-links a { color: var(--brand-dark); font-weight: 700; }
+    @media (max-width: 620px) { .download { align-items: stretch; flex-direction: column; } .download a { text-align: center; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <a class="back-link" href="finch_lessons_index.html" target="_blank" rel="noopener noreferrer">&larr; Back to Curriculum</a>
+      <h1>Getting Ready for Using Finches</h1>
+      <p class="subtitle"></p>
+    </header>
+
+    <section class="card">
+      <h2>Before Students Begin</h2>
+      <ol class="steps">
+        <li>Print the bluetooth name of each Finch onto a piece of tape and attach it to the Finch.</li>
+        <div class="upload-card">
+          <details class="image-toggle" style="margin-top:8px;">
+            <summary style="cursor:pointer; font-weight:700;">Show Example Image</summary>
+            <img src="Common Steps/bluetoothname.JPG" alt="Finch Bluetooth name label" loading="lazy" decoding="async" style="max-width:100%;height:auto; margin-top:4px;" />
+          </details>
+        </div>
+        <li>Go over classroom expectations for using the Finches.</li>
+      </ol>
+    </section>
+
+ <section class="card">
+      <h2>Setting up in FinchBlox</h2>
+      <ol class="steps">
+        <li>Connect the Finch to student devices using Bluetooth by selecting the option on the computer that matches the Finch's Bluetooth name. It is recommended to do this for the first time in small groups.</li>
+        </div>       
+            <div class="upload-card">
+            <details class="image-toggle" style="margin-top:8px;">
+              <summary style="cursor:pointer; font-weight:700;">Show How to Connect the Finch</summary>
+              <img src="" alt="Picture will go here" loading="lazy" decoding="async" style="max-width:100%;height:auto; margin-top:4px;" />
+            </details> 
+          </div>
+        <li>Ensure that students know they need a green flag in a yellow to run a program using the green flag at the top. They can also test what sections of code do by clicking them.</li>
+      </ol>
+    </ul>
+  </section>
+
+    <section class="card">
+      <h2>Setting up in MakeCode</h2>
+      <ol class="steps">
+        <li>Make sure each Finch has a USB mini-B cable with it.</li>
+        <li>Start a new MakeCode project.</li>
+        </div>       
+          <div class="upload-card">
+          <details class="image-toggle" style="margin-top:8px;">
+            <summary style="cursor:pointer; font-weight:700;">Show How to Start a New MakeCode Project</summary>
+            <img src="MakeCode GIFs\Common Steps\NewProject.gif" alt="Starting a new MakeCode project" loading="lazy" decoding="async" style="max-width:100%;height:auto; margin-top:4px;" />
+          </details> 
+        </div>
+        <li>Add the Finch extension to MakeCode.</li>
+        <div class="upload-card">
+          <details class="image-toggle" style="margin-top:8px;">
+            <summary style="cursor:pointer; font-weight:700;">Show How to Add the Finch Extension</summary>
+            <img src="MakeCode GIFs\Common Steps\Finch Extension.gif" alt="USB mini-B icon" loading="lazy" decoding="async" style="max-width:100%;height:auto; margin-top:4px;" />
+          </details> 
+        </div>
+        <li>Add the "start Finch" block anytime you are programming the Finch. If you are just programming the micro:bit, you don't need to add this block.</li>
+        <li>To download code, plug the USB mini-B cable into the micro:bit, not into the USB-C spot in the base of the Finch. Make this easier by having the side with the icon and B facing you. In MakeCode, click download and the code will copy to the micro:bit.</li>
+        <div class="upload-card">
+          <details class="image-toggle" style="margin-top:8px;">
+            <summary style="cursor:pointer; font-weight:700;">Show USB mini-B icon</summary>
+            <img src="MakeCode GIFs\Common Steps\USB mini-B icon.JPG" alt="USB mini-B icon" loading="lazy" decoding="async" style="max-width:100%;height:auto; margin-top:4px;" />
+          </details> 
+        </div>       
+          <div class="upload-card">
+          <details class="image-toggle" style="margin-top:8px;">
+            <summary style="cursor:pointer; font-weight:700;">Show USB mini-B Connected</summary>
+            <img src="MakeCode GIFs\Common Steps\USB mini-b plugged in.JPG" alt="Plugging in USB mini-B cable" loading="lazy" decoding="async" style="max-width:100%;height:auto; margin-top:4px;" />
+          </details>
+        </div>       
+          <div class="upload-card">
+          <details class="image-toggle" style="margin-top:8px;">
+            <summary style="cursor:pointer; font-weight:700;">Show Download in MakeCode</summary>
+            <img src="" alt="Plugging in USB mini-B cable" loading="lazy" decoding="async" style="max-width:100%;height:auto; margin-top:4px;" />
+          </details> 
+        </div>
+      <h2>Additional Tips</h2>
+        <li>Delete the Forever Loop by right-clicking on it and dragging it to the trash on the left. At this stage of coding, forever loops have a limited value and will cause more of a headache than it is worth.</li>
+          <div class="upload-card">
+            <details class="image-toggle" style="margin-top:8px;">
+              <summary style="cursor:pointer; font-weight:700;">Show Deleting the Forever Loop</summary>
+              <img src="MakeCode GIFs\Common Steps\Delete Forever.gif" alt="USB mini-B icon" loading="lazy" decoding="async" style="max-width:100%;height:auto; margin-top:4px;" />
+            </details> 
+          </div>
+        <li>Discuss placing code directly under "on start" with students. Anything placed under "on start" will run as soon as the Finch is turned on. One fun thing to do is to add a heart icon to let students know their FInch is "alive"</li>
+          <div class="upload-card">
+            <details class="image-toggle" style="margin-top:8px;">
+              <summary style="cursor:pointer; font-weight:700;">Show Adding a micro:bit Icon</summary>
+              <img src="MakeCode GIFs\Common Steps\alive-icon.png" alt="USB mini-B icon" loading="lazy" decoding="async" style="max-width:100%;height:auto; margin-top:4px;" />
+            </details> 
+          </div>
+        </ol>
+      </ul>
+    </section>
+  
+    <section class="card">
+      <h2>Switching from MakeCode to FinchBlox</h2>
+      <ol class="steps">
+        <li>Download the firmware below.</li>
+        <li>Connect the micro:bit to the computer using the USB mini‑B cable.</li>
+        <li>Open the files folder and locate <code>BBTFirmware.hex</code>. 
+        <li>Right‑click and drag it to the "MICROBIT (D:)" drive to drop it and it will copy over.</li>
+      </ol>
+      <div class="download">
+        <div><strong>FinchBlox firmware</strong><span></span></div>
+        <a href="BBTFirmware.hex" download="BBTFirmware.hex" target="_blank" rel="noopener noreferrer">Download BBTFirmware.hex</a>
+      </div>
+      <div class="upload-card">
+            <details class="image-toggle" style="margin-top:8px;">
+              <summary style="cursor:pointer; font-weight:700;">Show Copying Firmware</summary>
+              <img src="Common Steps\MakeCode-to-FinchBlox.gif" alt="Copying Firmware" loading="lazy" decoding="async" style="max-width:100%;height:auto; margin-top:4px;" />
+            </details> 
+      </div>
+      <nav class="footer-links" aria-label="Related resources">
+        <a href="troubleshooting_common_problems.html" target="_blank" rel="noopener noreferrer">Troubleshooting Common Problems</a>
+      </nav>
+    </section>
+  </main>
+  <script>
+    document.querySelectorAll('.upload-card input[type="file"]').forEach((input) => {
+      input.addEventListener('change', () => {
+        const preview = input.previousElementSibling;
+        const file = input.files?.[0];
+        if (!file) return;
+        const image = document.createElement('img');
+        image.alt = 'Uploaded setup reference';
+        image.src = URL.createObjectURL(file);
+        preview.replaceChildren(image);
+      });
+    });
+  </script>
+</body>
+</html>
