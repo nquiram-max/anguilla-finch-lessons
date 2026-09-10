@@ -143,14 +143,19 @@
         y = addText(pdf, lessonDesc, 18, y, pageWidth - 36) + 5;
       }
       // Add "Finished early?" section at the bottom of the PDF
-      const finishedEarlyEl = Array.from(document.querySelectorAll('.callout')).find(c =>
-        c.textContent && c.textContent.includes('If a couple students'));
-      if (finishedEarlyEl) {
+      let finishedEarlyText = '';
+      const finishedHeader = Array.from(document.querySelectorAll('.card-header')).find(h =>
+        h.textContent.trim() === 'Finished early?');
+      if (finishedHeader) {
+        const callout = finishedHeader.parentElement?.querySelector('.card-body .callout');
+        if (callout) finishedEarlyText = callout.textContent.trim();
+      }
+      if (finishedEarlyText) {
         if (y > 265) { pdf.addPage(); y = 18; }
         pdf.setFont(undefined, 'bold');
         y = addText(pdf, 'Finished early?', 18, y, pageWidth - 36, 6) + 3;
         pdf.setFont(undefined, 'normal');
-        y = addText(pdf, finishedEarlyEl.textContent.trim(), 18, y, pageWidth - 36) + 5;
+        y = addText(pdf, finishedEarlyText, 18, y, pageWidth - 36) + 5;
       }
       // Add Intro Activity at the top of the PDF (if present)
       const introText = document.getElementById('introBox')?.innerText.trim();
