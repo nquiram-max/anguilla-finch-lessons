@@ -180,13 +180,8 @@
         });
 
         const finalCodeImages = [...codingSet.querySelectorAll('.example-grid img')];
-        for (const originalImg of finalCodeImages) {
-          // Load a fresh Image with anonymous CORS to avoid canvas tainting.
-          const img = new Image();
-          img.crossOrigin = "anonymous";
-          // Encode the source URL to handle spaces and special characters.
-          const src = originalImg.getAttribute('src') || originalImg.currentSrc || originalImg.src;
-          img.src = src ? encodeURI(src) : '';
+        for (const img of finalCodeImages) {
+          // Use the existing image element directly; it is same‑origin, so no CORS needed.
           if (!await waitForImage(img)) continue;
           if (y > 245) { pdf.addPage(); y = 18; }
           pdf.setFont(undefined, 'bold');
@@ -204,22 +199,7 @@
           }
         }
       }
-      // Append extra time information at the bottom of the PDF
-      let timeText = '';
-      const infoItems = document.querySelectorAll('.hero-meta .info-item');
-      infoItems.forEach(item => {
-        const label = item.querySelector('.label')?.textContent.trim();
-        if (label === 'Estimated time' || label === 'Estimated Time') {
-          timeText = item.querySelector('.value')?.textContent.trim();
-        }
-      });
-      if (timeText) {
-        if (y > 265) { pdf.addPage(); y = 18; }
-        pdf.setFont(undefined, 'bold');
-        y = addText(pdf, 'Estimated time', 18, y, pageWidth - 36, 6) + 2;
-        pdf.setFont(undefined, 'normal');
-        y = addText(pdf, timeText, 18, y, pageWidth - 36) + 5;
-      }
+      // Estimated time no longer displayed per user request.
 
       const title = document.getElementById('lessonTitle')?.textContent || 'lesson';
       const filename = `${title.replace(/[^a-z0-9]+/gi, '-').replace(/-$/, '')}.pdf`;
