@@ -134,12 +134,13 @@
       y = addText(pdf, document.getElementById('lessonTitle')?.textContent, 18, y, pageWidth - 36, 8) + 5;
       pdf.setFontSize(12);
       // Add Lesson Description before the Intro Activity (if present)
-      if (typeof lessonData !== 'undefined' && lessonData.summary) {
+      const lessonDesc = document.getElementById('lessonSummary')?.textContent.trim();
+      if (lessonDesc) {
         if (y > 265) { pdf.addPage(); y = 18; }
         pdf.setFont(undefined, 'bold');
         y = addText(pdf, 'Lesson Description', 18, y, pageWidth - 36, 8) + 3;
         pdf.setFont(undefined, 'normal');
-        y = addText(pdf, lessonData.summary.trim(), 18, y, pageWidth - 36) + 5;
+        y = addText(pdf, lessonDesc, 18, y, pageWidth - 36) + 5;
       }
       // Add Intro Activity at the top of the PDF (if present)
       const introText = document.getElementById('introBox')?.innerText.trim();
@@ -168,7 +169,8 @@
         codingSet.querySelectorAll('.step').forEach((step, index) => {
           const rawTitle = step.querySelector('.step-head')?.textContent.trim() || '';
           // Insert a period after the leading number (e.g., "1 Title" → "1. Title").
-          const title = rawTitle.replace(/^(\d+)\s+/, '$1. ');
+          // Ensure a period and space after the leading number (e.g., "1In" → "1. In")
+          const title = rawTitle.replace(/^(\d+)(.*)/, '$1. $2');
           const copy = [...step.querySelectorAll('.step-copy > div:not(.step-head)')]
             .map((item) => item.textContent.trim()).join(' ');
           pdf.setFont(undefined, 'bold');
@@ -182,7 +184,9 @@
           // Load a fresh Image with anonymous CORS to avoid canvas tainting.
           const img = new Image();
           img.crossOrigin = "anonymous";
-          img.src = originalImg.currentSrc || originalImg.src;
+          // Encode the source URL to handle spaces and special characters.
+          const src = originalImg.getAttribute('src') || originalImg.currentSrc || originalImg.src;
+          img.src = src ? encodeURI(src) : '';
           if (!await waitForImage(img)) continue;
           if (y > 245) { pdf.addPage(); y = 18; }
           pdf.setFont(undefined, 'bold');
@@ -201,12 +205,20 @@
         }
       }
       // Append extra time information at the bottom of the PDF
-      if (typeof lessonData !== 'undefined' && lessonData.time) {
+      let timeText = '';
+      const infoItems = document.querySelectorAll('.hero-meta .info-item');
+      infoItems.forEach(item => {
+        const label = item.querySelector('.label')?.textContent.trim();
+        if (label === 'Estimated time' || label === 'Estimated Time') {
+          timeText = item.querySelector('.value')?.textContent.trim();
+        }
+      });
+      if (timeText) {
         if (y > 265) { pdf.addPage(); y = 18; }
         pdf.setFont(undefined, 'bold');
         y = addText(pdf, 'Estimated time', 18, y, pageWidth - 36, 6) + 2;
         pdf.setFont(undefined, 'normal');
-        y = addText(pdf, lessonData.time, 18, y, pageWidth - 36) + 5;
+        y = addText(pdf, timeText, 18, y, pageWidth - 36) + 5;
       }
 
       const title = document.getElementById('lessonTitle')?.textContent || 'lesson';
