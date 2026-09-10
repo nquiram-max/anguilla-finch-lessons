@@ -133,6 +133,14 @@
       pdf.setFontSize(18);
       y = addText(pdf, document.getElementById('lessonTitle')?.textContent, 18, y, pageWidth - 36, 8) + 5;
       pdf.setFontSize(12);
+      // Add Lesson Description before the Intro Activity (if present)
+      if (typeof lessonData !== 'undefined' && lessonData.summary) {
+        if (y > 265) { pdf.addPage(); y = 18; }
+        pdf.setFont(undefined, 'bold');
+        y = addText(pdf, 'Lesson Description', 18, y, pageWidth - 36, 8) + 3;
+        pdf.setFont(undefined, 'normal');
+        y = addText(pdf, lessonData.summary.trim(), 18, y, pageWidth - 36) + 5;
+      }
       // Add Intro Activity at the top of the PDF (if present)
       const introText = document.getElementById('introBox')?.innerText.trim();
       if (introText) {
@@ -158,10 +166,11 @@
         pdf.setFont(undefined, 'normal');
 
         codingSet.querySelectorAll('.step').forEach((step, index) => {
-          const title = step.querySelector('.step-head')?.textContent.trim() || '';
+          const rawTitle = step.querySelector('.step-head')?.textContent.trim() || '';
+          // Insert a period after the leading number (e.g., "1 Title" → "1. Title").
+          const title = rawTitle.replace(/^(\d+)\s+/, '$1. ');
           const copy = [...step.querySelectorAll('.step-copy > div:not(.step-head)')]
             .map((item) => item.textContent.trim()).join(' ');
-          // Title already contains the step number via the .step-num element, so do not prepend another number.
           pdf.setFont(undefined, 'bold');
           y = addText(pdf, title, 18, y, pageWidth - 36) + 1;
           pdf.setFont(undefined, 'normal');
@@ -169,28 +178,37 @@
         });
 
         const finalCodeImages = [...codingSet.querySelectorAll('.example-grid img')];
-        for (const image of finalCodeImages) {
-          // Attempt to load images with anonymous CORS to allow canvas conversion.
-          image.crossOrigin = "anonymous";
-          // Ensure the image is loaded; if not, skip it without stopping the PDF build.
-          if (!await waitForImage(image)) continue;
+        for (const originalImg of finalCodeImages) {
+          // Load a fresh Image with anonymous CORS to avoid canvas tainting.
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+          img.src = originalImg.currentSrc || originalImg.src;
+          if (!await waitForImage(img)) continue;
           if (y > 245) { pdf.addPage(); y = 18; }
           pdf.setFont(undefined, 'bold');
           y = addText(pdf, 'Final Code', 18, y, pageWidth - 36, 6) + 3;
           pdf.setFont(undefined, 'normal');
           try {
-            const dataUrl = await imageDataUrl(image);
+            const dataUrl = await imageDataUrl(img);
             const imageWidth = pageWidth - 36;
-            const imageHeight = Math.min((image.naturalHeight / image.naturalWidth) * imageWidth, 130);
+            const imageHeight = Math.min((img.naturalHeight / img.naturalWidth) * imageWidth, 130);
             if (y + imageHeight > 280) { pdf.addPage(); y = 18; }
             pdf.addImage(dataUrl, 'PNG', 18, y, imageWidth, imageHeight);
             y += imageHeight + 10;
           } catch (e) {
-            // If converting the image fails (e.g., cross‑origin), log and continue.
             console.warn('Skipping image in PDF due to error:', e);
           }
         }
       }
+      // Append extra time information at the bottom of the PDF
+      if (typeof lessonData !== 'undefined' && lessonData.time) {
+        if (y > 265) { pdf.addPage(); y = 18; }
+        pdf.setFont(undefined, 'bold');
+        y = addText(pdf, 'Estimated time', 18, y, pageWidth - 36, 6) + 2;
+        pdf.setFont(undefined, 'normal');
+        y = addText(pdf, lessonData.time, 18, y, pageWidth - 36) + 5;
+      }
+
       const title = document.getElementById('lessonTitle')?.textContent || 'lesson';
       const filename = `${title.replace(/[^a-z0-9]+/gi, '-').replace(/-$/, '')}.pdf`;
       // Use jsPDF's built‑in save method to trigger download directly
