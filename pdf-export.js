@@ -90,25 +90,42 @@
     return y;
   };
 
-  const imageDataUrl = (image) => new Promise((resolve, reject) => {
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    const source = new Image();
-    // Ensure the image is loaded with anonymous CORS to allow canvas drawing without taint.
-    source.crossOrigin = "anonymous";
-    const timeout = window.setTimeout(() => reject(new Error(`Image could not be loaded: ${image.src}`)), 5000);
-    source.onload = () => {
-      window.clearTimeout(timeout);
-      canvas.width = source.naturalWidth;
-      canvas.height = source.naturalHeight;
-      context.drawImage(source, 0, 0);
-      resolve(canvas.toDataURL('image/png'));
-    };
-    source.onerror = () => {
-      window.clearTimeout(timeout);
-      reject(new Error(`Image could not be loaded: ${image.src}`));
-    };
-    source.src = image.currentSrc || image.src;
+  // Fetch the image by URL and return { dataUrl, width, height }. This avoids
+  // lazy-loading and canvas-taint problems: the bytes come from fetch (no CORS
+  // needed for same-origin/relative URLs or file:// in most browsers), and the
+  // canvas is drawn from a blob: URL which never taints the canvas.
+  const loadImageData = (img) => new Promise((resolve, reject) => {
+    const url = img.currentSrc || img.src;
+    const timeout = window.setTimeout(() => reject(new Error(`Image load timed out: ${url}`)), 8000);
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error(`Image fetch failed (${res.status}): ${url}`);
+        return res.blob();
+      })
+      .then((blob) => {
+        const objectUrl = URL.createObjectURL(blob);
+        const source = new Image();
+        source.onload = () => {
+          window.clearTimeout(timeout);
+          const canvas = document.createElement('canvas');
+          canvas.width = source.naturalWidth;
+          canvas.height = source.naturalHeight;
+          canvas.getContext('2d').drawImage(source, 0, 0);
+          const dataUrl = canvas.toDataURL('image/png');
+          URL.revokeObjectURL(objectUrl);
+          resolve({ dataUrl, width: source.naturalWidth, height: source.naturalHeight });
+        };
+        source.onerror = () => {
+          window.clearTimeout(timeout);
+          URL.revokeObjectURL(objectUrl);
+          reject(new Error(`Image could not be decoded: ${url}`));
+        };
+        source.src = objectUrl;
+      })
+      .catch((err) => {
+        window.clearTimeout(timeout);
+        reject(err);
+      });
   });
 
   const waitForImage = (image) => new Promise((resolve) => {
@@ -123,6 +140,21 @@
       resolve(false);
     }, { once: true });
   });
+
+  // Stamp "Page N of M" at the bottom-right of every page. Call after all
+  // content has been added so the page count is final.
+  const addPageNumbers = (pdf) => {
+    const pageCount = pdf.internal.getNumberOfPages();
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    for (let i = 1; i <= pageCount; i++) {
+      pdf.setPage(i);
+      pdf.setFontSize(10);
+      pdf.setFont(undefined, 'normal');
+      pdf.text(`Page ${i} of ${pageCount}`, pageWidth - 18, pageHeight - 10, { align: 'right' });
+    }
+    pdf.setFontSize(12);
+  };
 
   button.addEventListener('click', async () => {
     button.disabled = true;
@@ -182,16 +214,16 @@
 
         const finalCodeImages = [...codingSet.querySelectorAll('.example-grid img')];
         for (const img of finalCodeImages) {
-          // Use the existing image element directly; ensure it has loaded.
-          if (!await waitForImage(img)) continue;
           if (y > 245) { pdf.addPage(); y = 18; }
           pdf.setFont(undefined, 'bold');
           y = addText(pdf, 'Final Code', 18, y, pageWidth - 36, 6) + 3;
           pdf.setFont(undefined, 'normal');
           try {
-            const dataUrl = await imageDataUrl(img);
+            // Load the image straight from its src URL so it works regardless of
+            // lazy loading, collapsed <details>, or file:// canvas restrictions.
+            const { dataUrl, width, height } = await loadImageData(img);
             const imageWidth = pageWidth - 36;
-            const imageHeight = Math.min((img.naturalHeight / img.naturalWidth) * imageWidth, 130);
+            const imageHeight = Math.min((height / width) * imageWidth, 130);
             if (y + imageHeight > 280) { pdf.addPage(); y = 18; }
             pdf.addImage(dataUrl, 'PNG', 18, y, imageWidth, imageHeight);
             y += imageHeight + 10;
@@ -216,6 +248,9 @@
         y = addText(pdf, finishedEarlyText, 18, y, pageWidth - 36) + 5;
       }
       // Estimated time no longer displayed per user request.
+
+      // Stamp page numbers at the bottom-right of every page before saving.
+      addPageNumbers(pdf);
 
       const title = document.getElementById('lessonTitle')?.textContent || 'lesson';
       const filename = `${title.replace(/[^a-z0-9]+/gi, '-').replace(/-$/, '')}.pdf`;
