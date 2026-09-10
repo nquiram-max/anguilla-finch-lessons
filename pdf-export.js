@@ -142,6 +142,16 @@
         pdf.setFont(undefined, 'normal');
         y = addText(pdf, lessonDesc, 18, y, pageWidth - 36) + 5;
       }
+      // Add "Finished early?" section at the bottom of the PDF
+      const finishedEarlyEl = Array.from(document.querySelectorAll('.callout')).find(c =>
+        c.textContent && c.textContent.includes('If a couple students'));
+      if (finishedEarlyEl) {
+        if (y > 265) { pdf.addPage(); y = 18; }
+        pdf.setFont(undefined, 'bold');
+        y = addText(pdf, 'Finished early?', 18, y, pageWidth - 36, 6) + 3;
+        pdf.setFont(undefined, 'normal');
+        y = addText(pdf, finishedEarlyEl.textContent.trim(), 18, y, pageWidth - 36) + 5;
+      }
       // Add Intro Activity at the top of the PDF (if present)
       const introText = document.getElementById('introBox')?.innerText.trim();
       if (introText) {
@@ -169,19 +179,22 @@
         codingSet.querySelectorAll('.step').forEach((step, index) => {
           const rawTitle = step.querySelector('.step-head')?.textContent.trim() || '';
           // Insert a period after the leading number (e.g., "1 Title" → "1. Title").
-          // Ensure a period and space after the leading number (e.g., "1In" → "1. In")
           const title = rawTitle.replace(/^(\d+)(.*)/, '$1. $2');
           const copy = [...step.querySelectorAll('.step-copy > div:not(.step-head)')]
             .map((item) => item.textContent.trim()).join(' ');
-          pdf.setFont(undefined, 'bold');
-          y = addText(pdf, title, 18, y, pageWidth - 36) + 1;
+          // Use normal font weight for step titles and copy (no bold).
           pdf.setFont(undefined, 'normal');
+          y = addText(pdf, title, 18, y, pageWidth - 36) + 1;
           y = addText(pdf, copy, 24, y, pageWidth - 42) + 4;
         });
 
         const finalCodeImages = [...codingSet.querySelectorAll('.example-grid img')];
-        for (const img of finalCodeImages) {
-          // Use the existing image element directly; it is same‑origin, so no CORS needed.
+        for (const originalImg of finalCodeImages) {
+          // Load a fresh Image with anonymous CORS to avoid canvas tainting and ensure proper loading.
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+          const src = originalImg.getAttribute('src') || originalImg.currentSrc || originalImg.src;
+          img.src = src ? encodeURI(src) : '';
           if (!await waitForImage(img)) continue;
           if (y > 245) { pdf.addPage(); y = 18; }
           pdf.setFont(undefined, 'bold');
