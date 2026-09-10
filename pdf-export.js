@@ -194,12 +194,8 @@
         });
 
         const finalCodeImages = [...codingSet.querySelectorAll('.example-grid img')];
-        for (const originalImg of finalCodeImages) {
-          // Load a fresh Image with anonymous CORS to avoid canvas tainting and ensure proper loading.
-          const img = new Image();
-          img.crossOrigin = "anonymous";
-          const src = originalImg.getAttribute('src') || originalImg.currentSrc || originalImg.src;
-          img.src = src ? encodeURI(src) : '';
+        for (const img of finalCodeImages) {
+          // Use the existing image element directly; ensure it has loaded.
           if (!await waitForImage(img)) continue;
           if (y > 245) { pdf.addPage(); y = 18; }
           pdf.setFont(undefined, 'bold');
