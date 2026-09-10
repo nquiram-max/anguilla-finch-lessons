@@ -94,6 +94,8 @@
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     const source = new Image();
+    // Ensure the image is loaded with anonymous CORS to allow canvas drawing without taint.
+    source.crossOrigin = "anonymous";
     const timeout = window.setTimeout(() => reject(new Error(`Image could not be loaded: ${image.src}`)), 5000);
     source.onload = () => {
       window.clearTimeout(timeout);
@@ -141,21 +143,6 @@
         y = addText(pdf, 'Lesson Description', 18, y, pageWidth - 36, 8) + 3;
         pdf.setFont(undefined, 'normal');
         y = addText(pdf, lessonDesc, 18, y, pageWidth - 36) + 5;
-      }
-      // Add "Finished early?" section at the bottom of the PDF
-      let finishedEarlyText = '';
-      const finishedHeader = Array.from(document.querySelectorAll('.card-header')).find(h =>
-        h.textContent.trim() === 'Finished early?');
-      if (finishedHeader) {
-        const callout = finishedHeader.parentElement?.querySelector('.card-body .callout');
-        if (callout) finishedEarlyText = callout.textContent.trim();
-      }
-      if (finishedEarlyText) {
-        if (y > 265) { pdf.addPage(); y = 18; }
-        pdf.setFont(undefined, 'bold');
-        y = addText(pdf, 'Finished early?', 18, y, pageWidth - 36, 6) + 3;
-        pdf.setFont(undefined, 'normal');
-        y = addText(pdf, finishedEarlyText, 18, y, pageWidth - 36) + 5;
       }
       // Add Intro Activity at the top of the PDF (if present)
       const introText = document.getElementById('introBox')?.innerText.trim();
@@ -212,6 +199,21 @@
             console.warn('Skipping image in PDF due to error:', e);
           }
         }
+      }
+      // Add "Finished early?" section after all steps and pictures
+      let finishedEarlyText = '';
+      const finishedHeader = Array.from(document.querySelectorAll('.card-header')).find(h =>
+        h.textContent.trim() === 'Finished early?');
+      if (finishedHeader) {
+        const callout = finishedHeader.parentElement?.querySelector('.card-body .callout');
+        if (callout) finishedEarlyText = callout.textContent.trim();
+      }
+      if (finishedEarlyText) {
+        if (y > 265) { pdf.addPage(); y = 18; }
+        pdf.setFont(undefined, 'bold');
+        y = addText(pdf, 'Finished early?', 18, y, pageWidth - 36, 6) + 3;
+        pdf.setFont(undefined, 'normal');
+        y = addText(pdf, finishedEarlyText, 18, y, pageWidth - 36) + 5;
       }
       // Estimated time no longer displayed per user request.
 
