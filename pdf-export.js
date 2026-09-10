@@ -133,6 +133,16 @@
       pdf.setFontSize(18);
       y = addText(pdf, document.getElementById('lessonTitle')?.textContent, 18, y, pageWidth - 36, 8) + 5;
       pdf.setFontSize(12);
+      // Add Intro Activity at the top of the PDF (if present)
+      const introText = document.getElementById('introBox')?.innerText.trim();
+      if (introText) {
+        if (y > 265) { pdf.addPage(); y = 18; }
+        pdf.setFont(undefined, 'bold');
+        y = addText(pdf, 'Intro Activity', 18, y, pageWidth - 36, 8) + 3;
+        pdf.setFont(undefined, 'normal');
+        y = addText(pdf, introText, 18, y, pageWidth - 36) + 5;
+      }
+
       pdf.setFont(undefined, 'bold');
       y = addText(pdf, 'Steps', 18, y, pageWidth - 36, 6) + 3;
       pdf.setFont(undefined, 'normal');
@@ -141,20 +151,27 @@
       codingSets.forEach((codingSet) => { codingSet.open = true; });
       for (const [setIndex, codingSet] of codingSets.entries()) {
         if (y > 265) { pdf.addPage(); y = 18; }
+        // Use the summary title directly (e.g., "Stage 1: ...") without the "Coding Set X:" prefix
+        const setTitle = codingSet.querySelector('summary')?.textContent.trim() || '';
         pdf.setFont(undefined, 'bold');
-        y = addText(pdf, `Coding Set ${setIndex + 1}: ${codingSet.querySelector('summary')?.textContent.trim() || ''}`, 18, y, pageWidth - 36, 6) + 3;
+        y = addText(pdf, setTitle, 18, y, pageWidth - 36, 6) + 3;
+        pdf.setFont(undefined, 'normal');
+
         codingSet.querySelectorAll('.step').forEach((step, index) => {
           const title = step.querySelector('.step-head')?.textContent.trim() || '';
           const copy = [...step.querySelectorAll('.step-copy > div:not(.step-head)')]
             .map((item) => item.textContent.trim()).join(' ');
+          // Title already contains the step number via the .step-num element, so do not prepend another number.
           pdf.setFont(undefined, 'bold');
-          y = addText(pdf, `${index + 1}. ${title}`, 18, y, pageWidth - 36) + 1;
+          y = addText(pdf, title, 18, y, pageWidth - 36) + 1;
           pdf.setFont(undefined, 'normal');
           y = addText(pdf, copy, 24, y, pageWidth - 42) + 4;
         });
 
         const finalCodeImages = [...codingSet.querySelectorAll('.example-grid img')];
         for (const image of finalCodeImages) {
+          // Attempt to load images with anonymous CORS to allow canvas conversion.
+          image.crossOrigin = "anonymous";
           // Ensure the image is loaded; if not, skip it without stopping the PDF build.
           if (!await waitForImage(image)) continue;
           if (y > 245) { pdf.addPage(); y = 18; }
