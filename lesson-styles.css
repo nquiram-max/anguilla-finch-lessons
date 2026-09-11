@@ -381,11 +381,13 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(31, 42, 55, 0.22);
+  transition: transform 150ms ease, background 150ms ease;
 }
-.carousel-nav.prev { left: -8px; }
-.carousel-nav.next { right: -8px; }
-.carousel-nav:hover, .carousel-nav:focus-visible { background: var(--brand-dark); outline: 3px solid #cfe0ff; outline-offset: 2px; }
-.carousel-nav:disabled { cursor: not-allowed; opacity: 0.35; box-shadow: none; animation: none; }
+.carousel-nav:hover:not(:disabled) { transform: translateY(-50%) scale(1.08); background: var(--brand-dark); }
+.carousel-nav:focus-visible { background: var(--brand-dark); outline: 3px solid #cfe0ff; outline-offset: 2px; }
+.carousel-nav.prev { left: 12px; }
+.carousel-nav.next { right: 12px; }
+.carousel-nav:disabled { cursor: not-allowed; opacity: 0.3; box-shadow: none; animation: none; }
 /* Attention cue: the next arrow pulses with a soft glow whenever another
    slide is available, guiding teachers to click it. */
 .carousel-nav.next:not(:disabled) {
@@ -402,25 +404,28 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 12px;
   margin-top: 12px;
 }
 .carousel-button { display: none; }
 .carousel-button:hover, .carousel-button:focus-visible { background: var(--brand-dark); outline: 3px solid #cfe0ff; outline-offset: 2px; }
 .carousel-button:disabled { cursor: not-allowed; opacity: 0.45; }
-.carousel-counter { color: var(--muted); font-weight: 700; margin-inline: auto; }
+.carousel-counter { color: var(--muted); font-weight: 700; }
 .gif-box {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   border: 2px dashed #bfd0f5;
   background: linear-gradient(180deg, #fbfdff 0%, #f2f7ff 100%);
   border-radius: 16px;
   min-height: 150px;
   padding: 14px;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  color: var(--muted);
 }
+/* Steps without an image still get arrows; anchor them to the slide itself. */
+.carousel-slide { position: relative; }
 .gif-box strong { color: var(--text); display: block; margin-bottom: 6px; }
 .gif-box img { display: block; max-width: 100%; max-height: 260px; object-fit: contain; }
 .gif-tag {

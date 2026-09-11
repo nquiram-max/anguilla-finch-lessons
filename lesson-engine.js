@@ -97,10 +97,18 @@
         ? `<p style="margin:0 0 14px; font-weight:normal;">${setInstructions}</p>`
         : '';
 
+      // One arrow pair per slide, overlaid on the GIF (or the copy if the step
+      // has no GIF) so each visible slide carries its own centered controls.
+      const navMarkup = `
+        <button class="carousel-nav prev" type="button" data-carousel-previous aria-label="Previous step">&#8249;</button>
+        <button class="carousel-nav next" type="button" data-carousel-next aria-label="Next step">&#8250;</button>
+      `;
+
       const stepsMarkup = steps.map((step, i) => {
         const gifMarkup = (!step.gif) ? '' : `
           <div class="gif-box">
             <img src="${step.gif}" alt="Guiding animation for step ${i + 1}" loading="lazy" decoding="async" />
+            ${navMarkup}
           </div>
         `;
         return `
@@ -110,6 +118,7 @@
               <div class="step-copy">
                 <div class="step-head"><span class="step-num">${i + 1}</span><span>${step.title || ''}</span></div>
                 <div>${step.text || ''}</div>
+                ${step.gif ? '' : navMarkup}
               </div>
             </div>
           </div>
@@ -149,9 +158,7 @@
             <div class="carousel" data-carousel>
               <div class="carousel-viewport">${stepsMarkup}</div>
               <div class="carousel-controls">
-                <button class="carousel-button" type="button" data-carousel-previous aria-label="Previous step">&#8592;</button>
                 <span class="carousel-counter" aria-live="polite">Step 1 of ${steps.length}</span>
-                <button class="carousel-button" type="button" data-carousel-next aria-label="Next step">&#8594;</button>
               </div>
             </div>
             <div style="margin-top: 18px;">
@@ -168,20 +175,20 @@
   document.querySelectorAll('[data-carousel]').forEach((carousel) => {
     const slides = [...carousel.querySelectorAll('.carousel-slide')];
     const counter = carousel.querySelector('.carousel-counter');
-    const previous = carousel.querySelector('[data-carousel-previous]');
-    const next = carousel.querySelector('[data-carousel-next]');
+    const previous = [...carousel.querySelectorAll('[data-carousel-previous]')];
+    const next = [...carousel.querySelectorAll('[data-carousel-next]')];
     let currentSlide = 0;
 
     const showSlide = (slideIndex) => {
       currentSlide = Math.max(0, Math.min(slideIndex, slides.length - 1));
       slides.forEach((slide, index) => slide.classList.toggle('active', index === currentSlide));
       counter.textContent = `Step ${currentSlide + 1} of ${slides.length}`;
-      previous.disabled = currentSlide === 0;
-      next.disabled = currentSlide === slides.length - 1;
+      previous.forEach((button) => button.disabled = currentSlide === 0);
+      next.forEach((button) => button.disabled = currentSlide === slides.length - 1);
     };
 
-    previous.addEventListener('click', () => showSlide(currentSlide - 1));
-    next.addEventListener('click', () => showSlide(currentSlide + 1));
+    previous.forEach((button) => button.addEventListener('click', () => showSlide(currentSlide - 1)));
+    next.forEach((button) => button.addEventListener('click', () => showSlide(currentSlide + 1)));
     showSlide(0);
   });
 })();
