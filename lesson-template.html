@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson Title</title>
+  <link rel="stylesheet" href="../lesson-styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <h1 id="lessonTitle">Lesson Title Goes Here</h1>
+          <p class="subtitle" id="lessonSummary"></p>
+          <div class="hero-actions" aria-label="Lesson resources">
+            <button class="hero-action" id="createPdfButton" type="button">Create PDF</button>
+            <a class="hero-action" href="../troubleshooting_common_problems.html" target="_blank" rel="noopener noreferrer">Troubleshooting Common Problems</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-meta" id="overviewList"></div>
+    </header>
+
+    <!-- Every card below is optional at the DATA level: if lessonData
+         doesn't supply the matching field, lesson-engine.js hides the
+         whole card automatically. Never delete cards per-lesson —
+         just leave the field out of lessonData. -->
+
+    <section class="card span-12">
+      <div class="card-header">Instructions</div>
+      <div class="card-body" id="instructionsBox"></div>
+    </section>
+
+    <main class="grid">
+      <section class="card span-6">
+        <div class="card-header">Setup</div>
+        <div class="card-body">
+          <div class="callout" id="setupNote"></div>
+          <div class="footer-note" id="setupTips"></div>
+        </div>
+      </section>
+
+      <section class="card span-6">
+        <div class="card-header">Materials Needed</div>
+        <div class="card-body" id="materialsBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Intro Activity</div>
+        <div class="card-body" id="introBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Coding Stages</div>
+        <div class="card-body">
+          <div class="accordion" id="codingSetsBox"></div>
+        </div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Finished early?</div>
+        <div class="card-body" id="finishedEarlyBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <details class="expandable-card" open>
+          <summary>Standards</summary>
+          <div class="card-body" id="standardsBox"></div>
+        </details>
+      </section>
+    </main>
+  </div>
+
+  <script src="../pdf-export.js"></script>
+  <script>
+    // Edit only this object to create a new lesson. Nothing above or
+    // below this script tag should normally need to change.
+    const lessonData = {
+      "title": "Lesson N: Title",
+      "instructions": "", // optional — omit or leave blank to hide the Instructions card
+      "summary": "",
+      "audience": "",
+      "time": "",
+      "method": "",
+      "standards": [],
+      "materials": [],
+      "setupNote": "",
+      "setupTips": "",
+      "intro": "",
+      "finishedEarly": "", // optional — omit or leave blank to hide the card
+      "codingSets": [
+        {
+          "title": "Stage 1: ...",
+          "instructions": "",
+          "steps": [
+            { "title": "Step description", "text": "", "gif": "../GIFs/example1.gif" }
+          ],
+          "finalCode": { "title": "", "caption": "", "image": "" }
+        }
+      ]
+    };
+  </script>
+  <script src="../lesson-engine.js"></script>
+</body>
+</html>
