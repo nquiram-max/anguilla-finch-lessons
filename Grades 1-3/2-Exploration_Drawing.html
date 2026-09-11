@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 2</title>
+  <link rel="stylesheet" href="../lesson-styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <h1 id="lessonTitle">Lesson Title Goes Here</h1>
+          <p class="subtitle" id="lessonSummary"></p>
+          <div class="hero-actions" aria-label="Lesson resources">
+            <button class="hero-action" id="createPdfButton" type="button">Create PDF</button>
+            <a class="hero-action" href="../troubleshooting_common_problems.html" target="_blank" rel="noopener noreferrer">Troubleshooting Common Problems</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-meta" id="overviewList"></div>
+    </header>
+
+    <section class="card span-12">
+      <div class="card-header">Instructions</div>
+      <div class="card-body" id="instructionsBox"></div>
+    </section>
+
+    <main class="grid">
+      <section class="card span-6">
+        <div class="card-header">Setup</div>
+        <div class="card-body">
+          <div class="callout" id="setupNote"></div>
+          <div class="footer-note" id="setupTips"></div>
+        </div>
+      </section>
+
+      <section class="card span-6">
+        <div class="card-header">Materials Needed</div>
+        <div class="card-body" id="materialsBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Intro Activity</div>
+        <div class="card-body" id="introBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Coding Stages</div>
+        <div class="card-body">
+          <div class="accordion" id="codingSetsBox"></div>
+        </div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Finished early?</div>
+        <div class="card-body" id="finishedEarlyBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <details class="expandable-card" open>
+          <summary>Standards</summary>
+          <div class="card-body" id="standardsBox"></div>
+        </details>
+      </section>
+    </main>
+  </div>
+
+  <script src="../pdf-export.js"></script>
+  <script>
+    // Edit this object to create a new lesson.
+    const lessonData = {
+      "title": "Lesson 2: Introduction to Finches with Drawing",
+      "instructions": "Follow the intro activity, then proceed through each coding stage step‑by‑step.",
+      "summary": "Students will represent an algorithm using pictures in a non-text environment. They will use logical reasoning to predict outputs, which will help them identify the steps needed to draw a square and design a sequence-based Finch program, correcting simple logic errors along the way.",
+      "audience": "Grades 1-6",
+      "time": "45 minutes",
+      "method": "FinchBlox",
+      "standards": [
+            "(MC) Represents algorithms using pictures",
+            "(MC) Can identify the steps needed to solve a problem",
+            "(MC) Designs solutions (algorithms) that use sequence",
+            "(MC) Creates simple programs in an environment that does not rely on text, e.g. programmable robots, Scratch, etc.",
+            "(MC) Creates programs that implement algorithms to achieve given goals",
+            "(MC) Detects and corrects simple logic errors in programs (i.e. debugging)",
+            "(MC) Uses logical reasoning to predict outputs"
+      ],
+      "materials": [
+            "Finch robot",
+            "markers",
+            "paper",
+            "tape"
+      ],
+      "setupNote": "Roll paper out onto the floor to create a space for students to draw with their Finches. Consider multiple spaces so students can spread out.",
+      "setupTips": "Teach students to pair their Finches to their computers in small groups. Write the whole micro:bit identifier on tape and attach it to the Finch to make this process easier.",
+      "intro": "Discuss what robots are with the class and ask what examples they can think of in their own lives. Introduce the Finch as a robot and have a discussion that robots are controlled by programs that they will be creating. Set classroom expectations for using the Finches (suggestion: Finches can't fly, so only run Finches on the ground). Show students how to turn on the Finch and connect it to their devices, ideally in small groups and with the identifying string taped to the Finch.",
+      "finishedEarly": "If they are finished early because they made a line, have them draw a square first. Challenge students to create a square a different way--perhaps by turning the other direction, moving in reverse, or using a loop. Students can also decorate their drawings. Another option is to have students help others around them.",
+      "codingSets": [
+            {
+                  "title": "Stage 1: FinchBlox Exploration",
+                  "instructions": "Students play and explore using FinchBlox. Start them on Level 1, but there is no harm if they jump to different levels very quickly.",
+                  "steps": []
+            },
+            {
+                    "title": "Stage 2: Drawing a Line or Square",
+                    "instructions": "As students seem ready for something new, encourage everyone to draw either a line or a square. When drawing a square, some students might want to turn left or go backwards. As long as they make a square, there's no wrong answer. Students should walk out their code to show they know what to expect. If they are paired up, one student can walk it out while the other codes it/directs.",
+                    "steps": [
+                        {
+                              "title": "Drag out a forward arrow block and attach it to the right of the start flag",
+                              "text": "",
+                              "gif": "../FinchBlox GIFs/square/square1.gif"
+                        },
+                        {
+                              "title": "Drag out a turn right arrow block and attach it to the right of the forward arrow",
+                              "text": "",
+                              "gif": "../FinchBlox GIFs/square/square2.gif"
+                        },
+                        {
+                              "title": "Drag out a forward arrow block and attach it to the right of the turn right arrow",
+                              "text": "",
+                              "gif": "../FinchBlox GIFs/square/square3.gif"
+                        },
+                        {
+                              "title": "Drag out a turn right arrow block and attach it to the right of the forward arrow",
+                              "text": "",
+                              "gif": "../FinchBlox GIFs/square/square4.gif"
+                        },
+                        {
+                              "title": "Drag out a forward arrow block and attach it to the right of the turn right arrow",
+                              "text": "",
+                              "gif": "../FinchBlox GIFs/square/square5.gif"
+                        },
+                        {
+                              "title": "Drag out a turn right arrow block and attach it to the right of the forward arrow",
+                              "text": "",
+                              "gif": "../FinchBlox GIFs/square/square6.gif"
+                        },
+                        {
+                              "title": "Drag out a forward arrow block and attach it to the right of the turn right arrow",
+                              "text": "",
+                              "gif": "../FinchBlox GIFs/square/square7.gif"
+                        },
+                        {
+                              "title": "Now you have a square! Test your code by clicking the start flag, then run it with a marker.",
+                              "text": "",
+                              "gif": false
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "Example Code for a Small Square",
+                        "caption": "",
+                        "image": "../Final Code Screenshots/FinchBlox-Square.png"
+                  }
+            }
+      ]
+    };
+  </script>
+  <script src="../lesson-engine.js"></script>
+</body>
+</html>
