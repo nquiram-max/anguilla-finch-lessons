@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 6</title>
+  <link rel="stylesheet" href="../lesson-styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <h1 id="lessonTitle">Lesson Title Goes Here</h1>
+          <p class="subtitle" id="lessonSummary"></p>
+          <div class="hero-actions" aria-label="Lesson resources">
+            <button class="hero-action" id="createPdfButton" type="button">Create PDF</button>
+            <a class="hero-action" href="../troubleshooting_common_problems.html" target="_blank" rel="noopener noreferrer">Troubleshooting Common Problems</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-meta" id="overviewList"></div>
+    </header>
+
+    <section class="card span-12">
+      <div class="card-header">Instructions</div>
+      <div class="card-body" id="instructionsBox"></div>
+    </section>
+
+    <main class="grid">
+      <section class="card span-6">
+        <div class="card-header">Setup</div>
+        <div class="card-body">
+          <div class="callout" id="setupNote"></div>
+          <div class="footer-note" id="setupTips"></div>
+        </div>
+      </section>
+
+      <section class="card span-6">
+        <div class="card-header">Materials Needed</div>
+        <div class="card-body" id="materialsBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Intro Activity</div>
+        <div class="card-body" id="introBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Coding Stages</div>
+        <div class="card-body">
+          <div class="accordion" id="codingSetsBox"></div>
+        </div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Finished early?</div>
+        <div class="card-body" id="finishedEarlyBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <details class="expandable-card" open>
+          <summary>Standards</summary>
+          <div class="card-body" id="standardsBox"></div>
+        </details>
+      </section>
+    </main>
+  </div>
+
+  <script src="../pdf-export.js"></script>
+  <script>
+    // Edit this object to create a new lesson.
+    const lessonData = {
+      "title": "Lesson 1: Planning, Creating, and Testing Algorithms with \"I am a Programmer\"",
+      "summary": "Students design an algorithms by identifying the steps needed to solve a problem and using logical reasoning that programs their \"robot\" teacher. Through this process, they will recognize the need for perscise instructions and will learn to detect and correct simple logic errors in programs (i.e. debugging).",
+      "audience": "Grades 1-6",
+      "time": "30 minutes",
+      "method": "I am a Programmer (https://docs.google.com/presentation/d/1-4fyWukN9GydY_phkflv-AVOi6Wo62jJQRhKv4hEpsk/edit?slide=id.p#slide=id.p)",
+      "standards": [
+            "(MC) Designs solutions (algorithms) that use sequence",
+            "(MC) Can identify the steps needed to solve a problem",
+            "(MC) Recognises that computers need precise instructions.",
+            "(MC) Uses logical reasoning to predict outputs",
+            "(MC) Detects and corrects simple logic errors in programs (i.e. debugging).",
+      ],
+      "materials": [
+            "pom poms or an alternative goal item"
+      ],
+      "setupNote": "Place pom poms around the classroom; these become goal items for students to \"program\" their teacher to reach.",
+      "setupTips": "Go through slides. Make sure to explain the concept of \"debugging\" and consider changing the directions to match the Finches to ease the transition.",
+      "intro": "Students explore planning, creating, and testing algorithms by programming their \"robot\" teacher. Place pom poms around the classroom; these become goal items for students to \"program\" their teacher to reach.",
+      "finishedEarly": "Have students create a new goal for their teacher to reach, and have them instruct their teacher to reach it. Students could also take turns instructing each other depending on the class size."
+    };
+  </script>
+  <script src="../lesson-engine.js"></script>
+</body>
+</html>
