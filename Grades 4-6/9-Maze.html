@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 6</title>
+  <link rel="stylesheet" href="../lesson-styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <h1 id="lessonTitle">Lesson Title Goes Here</h1>
+          <p class="subtitle" id="lessonSummary"></p>
+          <div class="hero-actions" aria-label="Lesson resources">
+            <button class="hero-action" id="createPdfButton" type="button">Create PDF</button>
+            <a class="hero-action" href="../troubleshooting_common_problems.html" target="_blank" rel="noopener noreferrer">Troubleshooting Common Problems</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-meta" id="overviewList"></div>
+    </header>
+
+    <section class="card span-12">
+      <div class="card-header">Instructions</div>
+      <div class="card-body" id="instructionsBox"></div>
+    </section>
+
+    <main class="grid">
+      <section class="card span-6">
+        <div class="card-header">Setup</div>
+        <div class="card-body">
+          <div class="callout" id="setupNote"></div>
+          <div class="footer-note" id="setupTips"></div>
+        </div>
+      </section>
+
+      <section class="card span-6">
+        <div class="card-header">Materials Needed</div>
+        <div class="card-body" id="materialsBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Intro Activity</div>
+        <div class="card-body" id="introBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Coding Stages</div>
+        <div class="card-body">
+          <div class="accordion" id="codingSetsBox"></div>
+        </div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Finished early?</div>
+        <div class="card-body" id="finishedEarlyBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <details class="expandable-card" open>
+          <summary>Standards</summary>
+          <div class="card-body" id="standardsBox"></div>
+        </details>
+      </section>
+    </main>
+  </div>
+
+  <script src="../pdf-export.js"></script>
+  <script>
+    // Edit this object to create a new lesson.
+    const lessonData = {
+      "title": "Lesson 9: Using If Statements to Navigate a Maze",
+      "summary": "Using logic, students will create a block-based Finch program that uses sequence, selection, and iteration to navigate a maze. Students will incorporate if statements, represent their algorithm using symbols, identify the constructs needed to solve the maze and will correct syntactic errors as needed.",
+      "audience": "Grades 4-6",
+      "time": "45 minutes",
+      "method": "Microsoft MakeCode (https://makecode.microbit.org/#pub:_Fra37z3mJ5ED)",
+      "standards": [
+            "(MC) Represents algorithms using symbols",
+            "(MC) Can identify the programming constructs needed to solve a problem (pattern recognition)",
+            "(MC) Can use logic to explain how an algorithm works",
+            "(MC) Designs solutions (algorithms) that use sequence, selection and iteration",
+            "(MC) Creates programs using a block-based programming language",
+            "(MC) Creates programs that reliably output an expected result based on a range of inputs",
+            "(MC) Uses if, then and else statements within programs.",
+            "(MC) Detects and corrects syntactic errors"
+      ],
+      "materials": [
+            "Finch robot",
+            "USB mini B cable",
+            "cardboard boxes",
+            "tape"
+      ],
+      "setupNote": "Using cardboard boxes, make a simple right turn only maze. Mark the start and finish line with tape. For the second session, make the maze look more impressive by creating right turn cul-de-sacs.",
+      "setupTips": "Due to friction, sometimes the Finches don't turn a full 90 degrees. Be prepared to straighten them out during this activity.",
+      "intro": "Stay Standing Game: Have all the students stand up. Introduce if statements by asking students to sit down if they have a pet, have a sibling, are wearing glasses, etc. Keep going until one student is left standing.",
+      "finishedEarly": "Challenge students to navigate a maze with left and right turns. This will require them to use a random binary true or false to determine which way to turn detailed below. As always, you can have students who finish early help others.",
+      "codingSets": [
+            {
+                  "title": "Using If Statements to Navigate a Maze",
+                  "steps": [
+                        {
+                              "title": "From Input, drag out “on button A pressed”",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze/maze2.gif"
+                        },
+                        {
+                              "title": "From Logic, drag out an “if true then” block and place it in “on button A pressed”",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze/maze3.gif"
+                        },
+                        {
+                              "title": "From Logic, drag out a comparison “0 < 0” and pace it where true is",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze/maze4.gif"
+                        },
+                        {
+                              "title": "From Finch, drag out “Finch distance (cm)” and drag it so it replaces the 0 on the left side of the comparison",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze/maze5.gif"
+                        },
+                        {
+                              "title": "From Finch, drag out “Finch Move forward 10 cm at 50%” and place it fully underneath the if statement",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze/maze6.gif"
+                        },
+                        {
+                              "title": "Change 50% to 100%",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze/maze7.gif"
+                        },
+                        {
+                              "title": "Change the 0 on the right side of the comparison to 20",
+                              "text": "the Finch should check for a distance twice as large as the distance the Finch is travelling to give it 10 cm or more to complete a turn",
+                              "gif": "MakeCode GIFs/maze/maze8.gif"
+                        },
+                        {
+                              "title": "From Finch, drag out “Finch turn right 90 degrees at 50%” and place it in the if statement",
+                              "text": "Though it is proper to have the Finch always check distance first, it normally (depending on how tight turns are and the distance they are checking) works to move first.",
+                              "gif": "MakeCode GIFs/maze/maze9.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "Finished Maze Code",
+                        "caption": "Insert a screenshot of the finished code here.",
+                        "image": "Final Code Screenshots/MakeCode-Maze1.png"
+                  }
+            },
+            {
+                  "title": "Extra Time: Navigating Left & Right Turns with Binary True or False",
+                  "introduction": "Introduce the concept of binary. Consider a maze where you must turn right and left—in this case using a random binary true or false is your best option. Adding an embedded if/else statement allows you to do this. It gets the Finch out of the maze with a partial success rate. Note: It could take a while and might be slightly painful to watch, so a short maze is recommended if you introduce this.",
+                  "steps": [
+                        {
+                              "title": "From Logic, drag out an “if true then/else” block and place it within the first if statement",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze2/maze2-1.gif"
+                        },
+                        {
+                              "title": "In Math, drag out “pick random true or false”",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze2/maze2-2.gif"
+                        },
+                        {
+                              "title": "Move the “Finch Turn Right” block in the first slot",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze2/maze2-3.gif"
+                        },
+                        {
+                              "title": "Duplicate this block by left clicking on it",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze2/maze2-4.gif"
+                        },
+                        {
+                              "title": "Move the duplicated “Finch Turn Right” block to the second slot",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze2/maze2-5.gif"
+                        },
+                        {
+                              "title": "Change “Right” to “Left”",
+                              "text": "",
+                              "gif": "MakeCode GIFs/maze2/maze2-6.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "Stage 2 Finished Code",
+                        "caption": "",
+                        "image": "Final Code Screenshots/MakeCodeMaze2.png"
+                  }
+            }
+      ]
+};
+  </script>
+  <script src="../lesson-engine.js"></script>
+</body>
+</html>
