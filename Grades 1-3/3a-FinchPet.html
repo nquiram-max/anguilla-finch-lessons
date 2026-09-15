@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 6</title>
+  <link rel="stylesheet" href="../lesson-styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <h1 id="lessonTitle">Lesson Title Goes Here</h1>
+          <p class="subtitle" id="lessonSummary"></p>
+          <div class="hero-actions" aria-label="Lesson resources">
+            <button class="hero-action" id="createPdfButton" type="button">Create PDF</button>
+            <a class="hero-action" href="../troubleshooting_common_problems.html" target="_blank" rel="noopener noreferrer">Troubleshooting Common Problems</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-meta" id="overviewList"></div>
+    </header>
+
+    <section class="card span-12">
+      <div class="card-header">Instructions</div>
+      <div class="card-body" id="instructionsBox"></div>
+    </section>
+
+    <main class="grid">
+      <section class="card span-6">
+        <div class="card-header">Setup</div>
+        <div class="card-body">
+          <div class="callout" id="setupNote"></div>
+          <div class="footer-note" id="setupTips"></div>
+        </div>
+      </section>
+
+      <section class="card span-6">
+        <div class="card-header">Materials Needed</div>
+        <div class="card-body" id="materialsBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Intro Activity</div>
+        <div class="card-body" id="introBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Coding Stages</div>
+        <div class="card-body">
+          <div class="accordion" id="codingSetsBox"></div>
+        </div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Finished early?</div>
+        <div class="card-body" id="finishedEarlyBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <details class="expandable-card" open>
+          <summary>Standards</summary>
+          <div class="card-body" id="standardsBox"></div>
+        </details>
+      </section>
+    </main>
+  </div>
+
+  <script src="../pdf-export.js"></script>
+  <script>
+    // Edit this object to create a new lesson.
+    const lessonData = {
+      "title": "Lesson 3a: Using Events to Control a Finch Pet",
+      "summary": "Students will represent algorithms using pictures, identify the steps needed to solve a problem, and create a sequence-based Finch program in a non-text environment that uses events to control when the program runs to make their Finch act like a pet, debugging simple errors as needed.",
+      "audience": "Grades 1-3",
+      "time": "25 minutes",
+      "method": "FinchBlox 3",
+      "standards": [
+            "(MC) Represents algorithms using pictures",
+            "(MC) Can identify the steps needed to solve a problem",
+            "(MC) Designs solutions (algorithms) that use sequence",
+            "(MC) Creates simple programs in an environment that does not rely on text, e.g. programmable robots, Scratch, etc.",
+            "(MC) Creates programs that implement algorithms to achieve given goals",
+            "(MC) Detects and corrects simple logic errors in programs (i.e. debugging).",
+            "(MC) Uses events to control when a program runs."
+      ],
+      "materials": [
+            "Finch robot",
+            "A food bowl (eg. a hula hoop or bowl)"
+      ],
+      "setupNote": "Find a clear area to set-up the food bowl",
+      "setupTips": "",
+      "intro": "First, ask if anyone has a pet. Then, ask what happens when they put your hand out in front of their pet. Next, ask what they think their Finch will do. Answer: It depends on the code! Now, their Finch is their new pet! Have everyone name their Finch!",
+      "finishedEarly": "Encourage students to either help those around them or to get creative and create their own challenges for their Finch pet.",
+      "codingSets": [
+            {
+                  "title": "Challenge 1: Can your Finch stop when you put your hand out in front of it?",
+                  "instructions": "If students are stuck, encourage them to explore the blue movements tab.",
+                  "steps": [
+                        {
+                              "title": "Add a Start block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/HandtoStop1.gif"
+                        },
+                        {
+                              "title": "Add a Move Forward until Sensors Detect Something block",
+                              "text": "This block is a forward arrow with a line on top",
+                              "gif": "/FinchBloxGIFs/HandtoStop2.gif"
+                        }
+    
+                  ],
+                  "finalCode": {
+                        "title": "Finished Code for Challenge 1",
+                        "caption": "",
+                        "image": "Final Code Screenshots/FinchBlox-HandtoStop.png"
+                  }
+            },
+            {
+                  "title": "Challenge 2: Can your Finch “chase its tail” (turn around in a circle) when you clap?",
+                  "instructions": "If students are stuck, encourage them to explore the yellow directives tab.",
+                  "steps": [
+                        {
+                              "title": "Add a Start with Sound block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/TurnAround1.gif"
+                        },
+                        {
+                              "title": "Add a Turn Right or Left block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/TurnAround2.gif"
+                        },
+                        {
+                              "title": "Change the turn block value to 360 degrees",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/TurnAround3.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "An Example of Finished Code for Challenge 2",
+                        "caption": "There are many other ways for students to code this challenge, creativity is encouraged.",
+                        "image": "Final Code Screenshots/FinchBlox-ChaseTail.png"
+                  }
+            },
+            {
+                  "title": "Challenge 3: Can your Finch go to the food bowl, eat for 30 seconds (wait) and then come back?",
+                  "instructions": "Remind students to have their pet back up before turning so they don't hurt it. Sometimes students forget they need a start block after deleting the clapping start block (they must delete the clapping block otherwise their code will continuously restart).",
+                  "steps": [
+                        {
+                              "title": "Add a Start block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/FoodBowl1.gif"
+                        },
+                        {
+                              "title": "Add a Move Forward until Sensors Detect Something block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/FoodBowl2.gif"
+                        },
+                        {
+                              "title": "Add a Wait block",
+                              "text": "This looks like a clock and is found in the yellow directives tab",
+                              "gif": "/FinchBloxGIFs/FoodBowl3.gif"
+                        },
+                        {
+                              "title": "Add a Move Backward block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/FoodBowl4.gif"
+                        },
+                        {
+                              "title": "Change the value to 20 cm",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/FoodBowl5.gif"
+                        },
+                        {
+                              "title": "Add a Turn Right or Left block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/FoodBowl6.gif"
+                        },
+                        {
+                              "title": "Change the value to 180 degrees",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/FoodBowl7.gif"
+                        },
+                        {
+                              "title": "Add a Move Forward until Sensors Detect Something block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/FoodBowl8.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "An Example of Finished Code for Challenge 3",
+                        "caption": "There are many other ways for students to code this challenge, creativity is encouraged.",
+                        "image": "Final Code Screenshots/FinchBlox-FoodBowl.png"
+                  }
+            },
+            {
+                  "title": "Challenge 4a: Can you make your Finch do something similar to “wagging its tail?”",
+                  "instructions": "Students have creative liberty to have colors light up on the tail or to have it do a small, fast turn in each direction.",
+                  "steps": [
+                        {
+                              "title": "Add a Start block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail1-1.gif"
+                        },
+                        {
+                              "title": "Add a Turn Right block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail1-2.gif"
+                        },
+                        {
+                              "title": "Change the speed to 100%",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail1-3.gif"
+                        },
+                        {
+                              "title": "Add a Turn Left block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail1-4.gif"
+                        },
+                        {
+                              "title": "Change the speed to 100%",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail1-5.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "Example 1 of Finished Code for Challenge 4",
+                        "caption": "There are many other ways for students to code this challenge, creativity is encouraged.",
+                        "image": "Final Code Screenshots/FinchBlox-WagTail1.png",
+                        }
+            },
+            {
+                  "title": "Challenge 4b: Can you make your Finch do something similar to “wagging its tail?”",
+                  "instructions": "Students have creative liberty to have colors light up on the tail or to have it do a small, fast turn in each direction.",
+                  "steps": [
+                        {
+                              "title": "Add a Start block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail2-1.gif"
+                        },
+                        {
+                              "title": "Add a Tail Light block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail2-2.gif"
+                        },
+                        {
+                              "title": "Change the time to 3 seconds",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail2-3.gif"
+                        },
+                        {
+                              "title": "Add a wait block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail2-4.gif"
+                        },
+                        {
+                              "title": "Change the time to 5 seconds",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail2-5.gif"
+                        },
+                        {
+                              "title": "Add a Tail Light block",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail2-6.gif"
+                        },
+                        {
+                              "title": "Change the time to 3 seconds",
+                              "text": "",
+                              "gif": "/FinchBloxGIFs/WagTail2-7.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "Example 2 of Finished Code for Challenge 4",
+                        "caption": "There are many other ways for students to code this challenge, creativity is encouraged.",
+                        "image": "Final Code Screenshots/FinchBlox-WagTail2.png"
+                  }
+            }
+      ]
+};
+  </script>
+  <script src="../lesson-engine.js"></script>
+</body>
+</html>
