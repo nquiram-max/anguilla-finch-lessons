@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 6</title>
+  <link rel="stylesheet" href="../lesson-styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <h1 id="lessonTitle">Lesson Title Goes Here</h1>
+          <p class="subtitle" id="lessonSummary"></p>
+          <div class="hero-actions" aria-label="Lesson resources">
+            <button class="hero-action" id="createPdfButton" type="button">Create PDF</button>
+            <a class="hero-action" href="../troubleshooting_common_problems.html" target="_blank" rel="noopener noreferrer">Troubleshooting Common Problems</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-meta" id="overviewList"></div>
+    </header>
+
+    <section class="card span-12">
+      <div class="card-header">Instructions</div>
+      <div class="card-body" id="instructionsBox"></div>
+    </section>
+
+    <main class="grid">
+      <section class="card span-6">
+        <div class="card-header">Setup</div>
+        <div class="card-body">
+          <div class="callout" id="setupNote"></div>
+          <div class="footer-note" id="setupTips"></div>
+        </div>
+      </section>
+
+      <section class="card span-6">
+        <div class="card-header">Materials Needed</div>
+        <div class="card-body" id="materialsBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Intro Activity</div>
+        <div class="card-body" id="introBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Coding Stages</div>
+        <div class="card-body">
+          <div class="accordion" id="codingSetsBox"></div>
+        </div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Finished early?</div>
+        <div class="card-body" id="finishedEarlyBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <details class="expandable-card" open>
+          <summary>Standards</summary>
+          <div class="card-body" id="standardsBox"></div>
+        </details>
+      </section>
+    </main>
+  </div>
+
+  <script src="../pdf-export.js"></script>
+  <script>
+    // Edit this object to create a new lesson.
+    const lessonData = {
+      "title": "Lesson 7: Using Loops and Algorithmic Operations in Second Line Dancing",
+      "summary": "Students will represent algorithms using symbols and identify a dancing task best completed by humans, but adopted for computers. Based on that, they will design a block-based forward moving dance routine that uses sequence, selection, and iteration with loops, arithmetic operators, and planned color/icon changes while correcting syntactic errors as needed.",
+      "audience": "Grades 4-6",
+      "time": "45 minutes",
+      "method": "Microsoft MakeCode (https://makecode.microbit.org/#pub:_Fra37z3mJ5ED)",
+      "finishedEarly": "Encourage students to decorate their Finches with Legos, pipe cleaners, paper, or other materials. Students can always add more dance moves, help others around them, or add more math operations or increase the complexity of them. Have students showcase their dance routines to the class and vote on their favorite ones.",
+      "standards": [
+            "(MC) Represents algorithms using symbols",
+            "(MC) Can identify tasks that are best completed by humans or computers",
+            "(MC) Can identify the programming constructs needed to solve a problem (pattern recognition)",
+            "(MC) Can use logic to explain how an algorithm works",
+            "(MC) Designs solutions (algorithms) that use sequence, selection and iteration",
+            "(MC) Creates programs using a block-based programming language",
+            "(MC) Creates programs that reliably output an expected result based on a range of inputs",
+            "(MC) Uses while, until and for loops within programs",
+            "(MC) Detects and corrects syntactic errors",
+            "(MC) Designs programs based on an algorithm that they have designed",
+            "(MC) Uses arithmetic operators such as addition, subtraction, multiplication and division"
+      ],
+      "materials": [
+            "Finch robot",
+            "USB mini B cable",
+            "legos",
+            "pipe cleaners, paper, or other materials for decorating the Finch"
+      ],
+      "setupNote": "Have a space in the classroom for students to showcase their dance routines.",
+      "setupTips": "",
+      "intro": "Show this video to your students to introduce the Second Line: https://www.youtube.com/watch?v=QpKiuVVXXeA Discuss with the students after what they noticed about the second line and how they might be able to change a human task into a Finch task using code.",
+      "codingSets": [
+            {
+                  "title": "Stage 1: Second Line Dancing",
+                  "instructions": "Instruct students that their Finch is now in the Second Line and they will be creating a dance routine using loops, movements, and lights for it. Ecnourage manipulation of the \"move\" and \"turn\" using math functions. Have students plan their forward moving algorithm on paper using symbols and determine how many times the Finch will do certain actions, especially with embedded loops. Have them think through what will happen each time the code repeats—does it keep changing if you only have one icon or color change in the loop?",
+                  "steps": [
+                        {
+                              "title": "In loops, add a count-controlled loop and change the number of repetitions to 10 (or modify as desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-1.gif"
+                        },
+                        {
+                              "title": "In Finch, add a movement block (modify as desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-2.gif"
+                        },
+                        {
+                              "title": "In basic, add an icon block (modify as desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-3.gif"
+                        },
+                        {
+                              "title": "In Finch, add a beak light block and change Green to 50 (or modify as desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-4.gif"
+                        },
+                        {
+                              "title": "In loops, add another count-controlled loop and change the number of repetitions to 4 (or modify as desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-5.gif"
+                        },
+                        {
+                              "title": "In Finch, add a turn block and change the angle to 180 degrees (or modify as desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-6.gif"
+                        },
+                        {
+                              "title": "In Finch, add a tail light block and change the light number to ALL and Blue to 100 (or modify as desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-7.gif"
+                        },
+                        {
+                              "title": "In Finch, add a turn block and change the angle to 180 degrees (or modify as desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-8.gif"
+                        },
+                        {
+                              "title": "In Finch, add a tail light block and change the light number to ALL then Red to 40 and Blue to 60 (or modify as desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-9.gif"
+                        },
+                        {
+                              "title": "In loops, add a count-controlled loop (modify it if desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-10.gif"
+                        },
+                        {
+                              "title": "In Finch, add a movement block and change the direction to backward and distance to 5 (or modify it if desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-11.gif"
+                        },
+                        {
+                              "title": "In basic, add an icon block and change the icon to a small heart (or modify it if desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-12.gif"
+                        },
+                        {
+                              "title": "In Finch, add a beak light block and change the light number to ALL then Red to 30 and Green to 30 (or modify as desired)",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/secondline-13.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "Finished Dance Code",
+                        "caption": "",
+                        "image": "Final Code Screenshots/MakeCode-SecondLine.png"
+                  }
+            },
+            {
+                  "title": "Stage 2: Incorporating Arithmetic Operators",
+                  "instructions": "In this stage, students will enhance their dance routines by using arithmetic operators to modify the Finch's movements and lights. Encourage them to experiment with addition, subtraction, multiplication, and division to replace static values with dynamic calculations.",
+                  "steps": [
+                        {
+                              "title": "Using an addition operation",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/mathoperation1.gif"
+                        },
+                        {
+                              "title": "Using a subtraction operation",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/mathoperation2.gif"
+                        },
+                        {
+                              "title": "Using a multiplication operation",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/mathoperation3.gif"
+                        },
+                        {
+                              "title": "Using a division operation",
+                              "text": "",
+                              "gif": "MakeCode GIFs/second line/mathoperation4.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "Finished Dance Code with Arithmetic Operators",
+                        "caption": "",
+                        "image": "Final Code Screenshots/Secondline-Math.png"
+                  }
+            }
+      ]
+};
+  </script>
+  <script src="../lesson-engine.js"></script>
+</body>
+</html>
