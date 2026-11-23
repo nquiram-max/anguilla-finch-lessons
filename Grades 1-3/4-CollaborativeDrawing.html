@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 4</title>
+  <link rel="stylesheet" href="../lesson-styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <h1 id="lessonTitle">Lesson Title Goes Here</h1>
+          <p class="subtitle" id="lessonSummary"></p>
+          <div class="hero-actions" aria-label="Lesson resources">
+            <button class="hero-action" id="createPdfButton" type="button">Create PDF</button>
+            <a class="hero-action" href="../troubleshooting_common_problems.html" target="_blank" rel="noopener noreferrer">Troubleshooting Common Problems</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-meta" id="overviewList"></div>
+    </header>
+
+    <section class="card span-12">
+      <div class="card-header">Instructions</div>
+      <div class="card-body" id="instructionsBox"></div>
+    </section>
+
+    <main class="grid">
+      <section class="card span-6">
+        <div class="card-header">Setup</div>
+        <div class="card-body">
+          <div class="callout" id="setupNote"></div>
+          <div class="footer-note" id="setupTips"></div>
+        </div>
+      </section>
+
+      <section class="card span-6">
+        <div class="card-header">Materials Needed</div>
+        <div class="card-body" id="materialsBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Intro Activity</div>
+        <div class="card-body" id="introBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Coding Stages</div>
+        <div class="card-body">
+          <div class="accordion" id="codingSetsBox"></div>
+        </div>
+      </section>
+
+      <section class="card span-12">
+        <div class="card-header">Finished early?</div>
+        <div class="card-body" id="finishedEarlyBox"></div>
+      </section>
+
+      <section class="card span-12">
+        <details class="expandable-card" open>
+          <summary>Standards</summary>
+          <div class="card-body" id="standardsBox"></div>
+        </details>
+      </section>
+    </main>
+  </div>
+
+  <script src="../pdf-export.js"></script>
+  <script>
+    // Edit this object to create a new lesson.
+    const lessonData = {
+      "title": "Lesson 4: Planning Algorithms to Draw Collaboratively with Finches",
+      "summary": "Students will represent an algorithm using pictures, identify the steps needed to complete a multi-part drawing, and work collaboratively to design and revise a sequence-based Finch program in a non-text environment that uses precise instructions, count-controlled loops, and logical reasoning to predict and debug outputs.",
+      "audience": "Grades 1-3",
+      "time": "45 minutes",
+      "method": "FinchBlox 3 (https://finchblox.birdbraintechnologies.com/FinchBlox.html)",
+      "standards": [
+            "(MC) Represents algorithms using symbols",
+            "(MC) Can identify the steps needed to solve a problem",
+            "(MC) Designs solutions (algorithms) that use sequence",
+            "(MC) Creates simple programs in an environment that does not rely on text, e.g. programmable robots, Scratch, etc.",
+            "(MC) Creates programs that implement algorithms to achieve given goals",
+            "(MC) Detects and corrects simple logic errors in programs (i.e. debugging).",
+            "(MC) Creates programs that use precise instructions",
+            "(MC) Uses count-controlled loops within programs",
+            "(MC) Uses logical reasoning to predict outputs",
+            "(MC) Sets the value of parameters",
+            "(MC) Uses numbers as parameters",
+      ],
+      "materials": [
+            "Finch robot",
+            "large paper",
+            "markers",
+            "tape"
+      ],
+      "setupNote": "Roll out enough paper for students to draw comfortably. Pair students in groups of 2-4 so they can plan and test together.",
+      "setupTips": "Encourage students to use loops when drawing and to consider the precision of distances. Note: The Finches are not perfect and might run slightly differently each time especially with small distances and turning angles. If students have correct geometry and are experiencing this, just encourage them that technology has limitations.",
+      "intro": "Have students complete this worksheet (https://docs.google.com/document/d/1L0ugJLC7UzJWQjoH6P43C3Qrv2Gzeu4zxDk55TjUMIk/edit?tab=t.0) to think about what is involved in drawing different shapes. Students will be working in their groups to draw a picture together with each person drawing one shape; first, they will draw their idea on paper to plan what they want their Finch to do. Next, they will draw code on paper that represents how the Finch will move. Students code their part of the drawing testing it and making adjustments as needed. Once they are ready, students will run their full code without a marker and then with a marker in the Finch to draw their picture. After, they will write their names by their final drawing.",
+      "finishedEarly": "Encourage students to either help those around them or to get creative by coloring in their picture. If they want to continue with their group after coloring, they can create a new picture.",
+      "codingSets": [
+            {
+                  "title": "Student 1: Square for the Base of a House",
+                  "instructions": "This is just an example, students are welcome to use any of the different shapes (ex. polygons, circles, rectangles, different types of triangles) they can make to create a drawing.",
+                  "steps": [
+                        {
+                              "title": "Add a Numbered Loop Block and Change the Number of Repeats to 4",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/20square/square1.gif"
+                        },
+                        {
+                              "title": "Place a Move Forward Block inside the Loop and Change the Distance to 20",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/20square/square2.gif"
+                        },
+                        {
+                              "title": "Place a Turn Right Block inside the Loop after the Move Forward Block",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/20square/square3.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "Finished Code for the Square Base of the House",
+                        "caption": "",
+                        "image": ".../Final%20Code%Screenshots/FinchBlox-house-square.png"
+                  }
+            },
+            {
+                  "title": "Student 2: Equilateral Triangle for the Roof of a House",
+                  "instructions": "This is just an example, students are welcome to use different shapes, directions of movement, and angles.",
+                  "steps": [
+                        {
+                              "title": "Add a Numbered Loop Block and Change the Number of Repeats to 3",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/20triangle/triangle1.gif"
+                        },
+                        {
+                              "title": "Place a Move Forward Block inside the Loop and Change the Distance to 20",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/20triangle/triangle2.gif"
+                        },
+                        {
+                              "title": "Place a Turn Right Block inside the Loop after the Move Forward Block and Change the Angle to 60",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/20triangle/triangle3.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "Finished Code for the Equilateral Triangle Roof",
+                        "caption": "Have students run the Finch on the paper without the marker first. Help them problem solve if needed so that the Finch begins at the top left corner of the square facing the left.",
+                        "image": ".../Final%20Code%Screenshots/FinchBlox-house-triangle.png"
+                  }
+            },
+            {
+                  "title": "Student 3: Rectangle for the Door of a House",
+                  "instructions": "This is just an example, students are welcome to use different shapes, directions of movement, and angles.",
+                  "steps": [
+                        {
+                              "title": "Add a Numbered Loop Block and Change the Number of Repeats to 2",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/rectangle/rectangle1.gif"
+                        },
+                        {
+                              "title": "Place a Move Forward Block inside the Loop",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/rectangle/rectangle2.gif"
+                        },
+                        {
+                              "title": "Place a Turn Right Block inside the Loop after the Move Forward Block",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/rectangle/rectangle3.gif"
+                        },
+                        {
+                              "title": "Place a Move Forward Block inside the Loop after the Turn Right Block and Change the Distance to 5",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/rectangle/rectangle4.gif"
+                        },
+                        {
+                              "title": "Place a Turn Right Block inside the Loop after the Move Forward Block",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/rectangle/rectangle5.gif"
+                        }
+
+                  ],
+                  "finalCode": {
+                        "title": "Finished Code for the Rectangular Door",
+                        "caption": "Have students run the Finch on the paper without the marker first. Help them problem solve if needed so that the Finch begins somewhere on the bottom line of the square facing up.",
+                        "image": ".../Final%20Code%Screenshots/FinchBlox-house-rectangle.png"
+                  }
+            },
+            {
+                  "title": "Extra: Circle",
+                  "instructions": "Technically to draw a circle in 5 degree increments, you would need to repeat 72 times. However, the Finch is not perfect and will not draw a perfect circle. Have students start with this code and count how many times it takes for the Finch to complete the circle and adjust their code based on that.",
+                  "steps": [
+                        {
+                              "title": "Add a Numbered Loop Block",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/circle/circle1.gif"
+                        },
+                        {
+                              "title": "Place a Numbered Loop Block inside the Loop and Change the Number of Repeats to 7",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/circle/circle2.gif"
+                        },
+                        {
+                              "title": "Place a Turn Right Block inside the Loop after the Move Forward Block and Change the Angle to 5",
+                              "text": "Changing the Speed to 100% will speed up the time it takes for the Finch to draw the circle",
+                              "gif": ".../FinchBlox%20GIFs/shapes/circle/circle3.gif"
+                        },
+                        {
+                              "title": "Place a Move Forward Block inside the Loop and Change the Distance to 5",
+                              "text": "Changing the Speed to 100% will speed up the time it takes for the Finch to draw the circle",
+                              "gif": ".../FinchBlox%20GIFs/shapes/circle/circle4.gif"
+                        },
+                        {
+                              "title": "Place a Numbered Loop to the Right of the Main Loops and Change the Number of Repeats to 2",
+                              "text": "",
+                              "gif": ".../FinchBlox%20GIFs/shapes/circle/circle5.gif"
+                        },
+                        {
+                              "title": "Place a Turn Right Block inside the Loop after the Move Forward Block and Change the Angle to 5",
+                              "text": "Changing the Speed to 100% will speed up the time it takes for the Finch to draw the circle",
+                              "gif": ".../FinchBlox%20GIFs/shapes/circle/circle6.gif"
+                        },
+                        {
+                              "title": "Place a Move Forward Block inside the Loop and Change the Distance to 5",
+                              "text": "Changing the Speed to 100% will speed up the time it takes for the Finch to draw the circle",
+                              "gif": ".../FinchBlox%20GIFs/shapes/circle/circle7.gif"
+                        }
+                  ],
+                  "finalCode": {
+                        "title": "Finished Code for a Circle",
+                        "caption": "",
+                        "image": ".../Final%20Code%Screenshots/FinchBlox-Circle.png"
+                  }
+            }
+      ]
+};
+  </script>
+  <script src="../lesson-engine.js"></script>
+</body>
+</html>
